@@ -1,5 +1,6 @@
 package com.gabriel.todo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,11 @@ public class TodoService {
 	public Todo findById(Long id) {
 		Optional<Todo> obj = repository.findById(id);
 		return obj.orElse(null);
+	}
+
+	public List<Todo> findAllOpen() {
+		List<Todo> list = repository.findAllOpen();
+		return list;
 	}
 
 }
