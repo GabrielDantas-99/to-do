@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.gabriel.todo.domain.Todo;
 import com.gabriel.todo.repositories.TodoRepository;
+import com.gabriel.todo.services.exceptions.ObjectNotFoundException;
 
 // Camada responsável pela lógica de negócio
 
@@ -19,7 +20,8 @@ public class TodoService {
 
 	public Todo findById(Long id) {
 		Optional<Todo> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Todo.class.getName()));
 	}
 
 	public List<Todo> findAllOpen() {
@@ -44,7 +46,7 @@ public class TodoService {
 
 	public void delete(Long id) {
 		repository.deleteById(id);
-		
+
 	}
 
 }
