@@ -21,7 +21,7 @@ public class TodoService {
 	public Todo findById(Long id) {
 		Optional<Todo> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Todo.class.getName()));
+				"Objeto não encontrado! Id: " + id + ". Tipo: " + Todo.class.getName()));
 	}
 
 	public List<Todo> findAllOpen() {
@@ -47,6 +47,15 @@ public class TodoService {
 	public void delete(Long id) {
 		repository.deleteById(id);
 
+	}
+
+	public Todo update(Long id, Todo obj) {
+		Todo newObj = findById(id);
+		newObj.setTitulo(obj.getTitulo());
+		newObj.setDeadLine(obj.getDeadLine());
+		newObj.setDescricao(obj.getDescricao());
+		newObj.setFinalizada(obj.getFinalizada());
+		return repository.save(newObj);
 	}
 
 }
