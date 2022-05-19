@@ -1,13 +1,15 @@
 package com.gabriel.todo.domain;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Todo implements Serializable{
@@ -19,7 +21,9 @@ public class Todo implements Serializable{
 	private Long Id;
 	private String titulo;
 	private String descricao;
-	private LocalDateTime deadLine;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private Date deadLine;
 	private Boolean finalizada = false;
 
 	public Todo() {
@@ -27,7 +31,7 @@ public class Todo implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Todo(Long id, String titulo, String descricao, LocalDateTime deadLine, Boolean finalizada) {
+	public Todo(Long id, String titulo, String descricao, Date deadLine, Boolean finalizada) {
 		super();
 		Id = id;
 		this.titulo = titulo;
@@ -60,11 +64,11 @@ public class Todo implements Serializable{
 		this.descricao = descricao;
 	}
 
-	public LocalDateTime getDeadLine() {
+	public Date getDeadLine() {
 		return deadLine;
 	}
 
-	public void setDeadLine(LocalDateTime deadLine) {
+	public void setDeadLine(Date deadLine) {
 		this.deadLine = deadLine;
 	}
 
